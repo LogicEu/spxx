@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cc=gcc
-std=-std=c99
+std=-std=c89
 opt=-O2
 inc=(
     -I.
