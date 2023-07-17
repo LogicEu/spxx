@@ -60,7 +60,7 @@ clean() {
 
 install() {
     [ "$EUID" -ne 0 ] && echo "Run with 'sudo' to install" && exit
-    [ ! -f $ipath] && echo "install directory 'ipath' not found '$ipath'" && exit
+    [ ! -d $ipath] && echo "install directory 'ipath' not found '$ipath'" && exit
     cmd cp spxx.h $ipath
     for m in ${modules[*]}; do cmd cp $m/$m.h $ipath; done
     echo "Successfully installed spxx"
@@ -69,7 +69,7 @@ install() {
 
 uninstall() {
     [ "$EUID" -ne 0 ] && echo "Run with 'sudo' to uninstall" && exit
-    [ ! -f $ipath] && echo "install directory 'ipath' not found '$ipath'" && exit
+    [ ! -d $ipath] && echo "install directory 'ipath' not found '$ipath'" && exit
     cleanf $ipath/spxx.h
     for m in ${modules[*]}; do cleanf $ipath/$m.h; done
     echo "Successfully uninstalled spxx"
