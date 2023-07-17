@@ -1,4 +1,4 @@
-#define SPXE_APPLICATION
+#define SPXX_APPLICATION
 #include <spxx.h>
 #include <stdlib.h>
 #include <stdio.h>

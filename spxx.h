@@ -44,18 +44,21 @@ right out of the box.
 
 /* Simple Pixel Extension */
 
-#ifdef SPXE_APPLICATION
+#ifdef SPXX_APPLICATION
+
+#ifndef SPXM_APPLICATION
 #define SPXM_APPLICATION
+#endif /* SPXM_APPLICATION */
+
+#ifndef SPXE_APPLICATION
+#define SPXE_APPLICATION
 #endif /* SPXE_APPLICATION */
 
-#include <spxe.h>
-#include <spxmath.h>
+#endif /* SPXX_APPLICATION */
 
-typedef struct Tex2D {
-    Px* fb;
-    int width;
-    int height;
-} Tex2D;
+#include <spxmath.h>
+#include <spximg.h>
+#include <spxe.h>
 
 typedef struct Vert2D {
     vec2 pos;
@@ -109,7 +112,7 @@ void    spxxFontSize(Font2D* font, size_t size);
 int     spxxFontDrawGlyph(Tex2D texture, const Glyph glyph, ivec2 p, const Px color);
 int     spxxFontDrawText(Tex2D texture, const Font2D*, const char*, ivec2, const Px);
 
-#ifdef SPXE_APPLICATION
+#ifdef SPXX_APPLICATION
 
 /*********************
 ******** spxx ********

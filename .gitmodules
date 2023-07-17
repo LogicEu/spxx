@@ -1,3 +1,9 @@
 [submodule "spxe"]
 	path = spxe
 	url = https://github.com/LogicEu/spxe.git
+[submodule "spxmath"]
+	path = spxmath
+	url = https://github.com/LogicEu/spxmath.git
+[submodule "spximg"]
+	path = spximg
+	url = https://github.com/LogicEu/spximg.git
