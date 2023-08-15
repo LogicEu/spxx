@@ -9,5 +9,6 @@ C++20.
 
 * [spxe](https://github.com/LogicEu/spxe.git): Core real-time pixel rendering engine
 * [spxmath](https://github.com/LogicEu/spxmath.git): Math library implementing vectors and matrixes.
-* [spximg](https://github.com/LogicEu/spximg.git): Library to load and save images
+* [spximg](https://github.com/LogicEu/spximg.git): Library to load and save images easily
+* [spxplot](https://github.com/LogicEu/spxplot.git): Plotting functions and algorithms
 

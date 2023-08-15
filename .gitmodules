@@ -7,3 +7,6 @@
 [submodule "spximg"]
 	path = spximg
 	url = https://github.com/LogicEu/spximg.git
+[submodule "spxplot"]
+	path = spxplot
+	url = https://github.com/LogicEu/spxplot.git
