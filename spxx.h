@@ -59,7 +59,7 @@ include statement.
 #endif /* SPXI_APPLICATION */
 
 #ifndef SPXP_APPLICATION
-#define SPXP_APPLICACTION
+#define SPXP_APPLICATION
 #endif /* SPXP_APPLICATION */
 
 #endif /* SPXX_APPLICATION */
@@ -81,7 +81,7 @@ typedef struct Font2D {
     Glyph* glyphs;
 } Font2D;
 
-#define spxxRun(tex) spxeRun((tex).fb)
+#define spxxRun(tex) spxeRun((tex).pixbuf)
 
 Tex2D   spxxStart(const char* title, int ww, int wh, int sw, int sh);
 int     spxxEnd(Tex2D texture);
@@ -126,8 +126,8 @@ Tex2D spxxStart(const char* title, int ww, int wh, int sw, int sh)
         return t;
     }
 
-    t.fb = spxeStart(title, ww, wh, sw, sh);
-    if (!t.fb) {
+    t.pixbuf = spxeStart(title, ww, wh, sw, sh);
+    if (!t.pixbuf) {
         fprintf(stderr, "spxx coult not init spxe\n");
         return t;
     }
@@ -140,7 +140,7 @@ Tex2D spxxStart(const char* title, int ww, int wh, int sw, int sh)
 int spxxEnd(Tex2D texture)
 {
     FT_Done_FreeType(spxx.ft);
-    return spxeEnd(texture.fb);
+    return spxeEnd(texture.pixbuf);
 }
 
 void spxxFontSize(Font2D* font, size_t size)

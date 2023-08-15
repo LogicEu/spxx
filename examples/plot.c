@@ -107,7 +107,7 @@ int main(const int argc, const char** argv)
     c.y = (float)spxe.scrres.height * 0.5F;
     size = spxe.scrres.width * spxe.scrres.height * 4;
     
-    while (spxeRun(fb.fb)) {
+    while (spxeRun(fb.pixbuf)) {
         
         if (spxeKeyPressed(ESCAPE)) {
             break;
@@ -117,7 +117,7 @@ int main(const int argc, const char** argv)
         }
         
         m = pxMousePos();
-        memset(fb.fb, 0, size);
+        memset(fb.pixbuf, 0, size);
         
         if (t) {
             pxPlotTriSmooth(
