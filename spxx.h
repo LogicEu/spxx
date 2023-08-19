@@ -156,7 +156,7 @@ void spxxFontSize(Font2D* font, size_t size)
         }
 
         len = font->face->glyph->bitmap.width * font->face->glyph->bitmap.rows;
-        font->glyphs[c].pixmap = realloc(font->glyphs[c].pixmap, len);
+        font->glyphs[c].pixmap = (unsigned char*)realloc(font->glyphs[c].pixmap, len);
         font->glyphs[c].size.x = font->face->glyph->bitmap.width;
         font->glyphs[c].size.y = font->face->glyph->bitmap.rows;
         font->glyphs[c].bearing.x = font->face->glyph->bitmap_left;
@@ -191,7 +191,7 @@ Font2D spxxFontLoad(const char* path)
         return font;
     }
 
-    font.glyphs = calloc(sizeof(Glyph), SPXX_GLYPH_COUNT);
+    font.glyphs = (Glyph*)calloc(sizeof(Glyph), SPXX_GLYPH_COUNT);
     spxxFontSize(&font, SPXX_FONT_SIZE);
     return font;
 }
