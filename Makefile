@@ -1,6 +1,5 @@
 # spxx Makefile
 
-SRC=main.c
 TARGET=libspxx
 
 CC=gcc
@@ -25,17 +24,28 @@ endif
 
 CFLAGS=$(STD) $(OPT) $(WFLAGS)
 
+.PHONY: clean static shared all
+
+all: static shared
+
+static: $(TARGET).a
+
+shared: $(TARGET).$(SUFFIX)
+
+$(TARGET).a: $(OBJS)
+	ar -cr $@ $^
+
 $(TARGET).$(SUFFIX): $(OBJS)
 	$(CC) $(OBJS) -o $@ $(DLIB) $(CFLAGS) $(LIBS) $(OSLIBS)
 
-.PHONY: clean
 clean:
-	$(shell [ -d $(OBJDIR) ] && rm -r $(OBJDIR))
-	$(shell [ -f $(TARGET).$(SUFFIX) ] && rm $(TARGET).$(SUFFIX))
+	$(RM) -r $(OBJDIR)
+	$(RM) $(TARGET).$(SUFFIX)
+	$(RM) $(TARGET).a
 
-$(OBJDIR)/%.o: % $(OBJDIR) $(SRC)
-	$(eval $<_TMP := $(shell echo $< | tr a-z A-Z | sed 's/\(SPX.\)/\-D\1_APPLICATION/g'))
-	$(CC) -c $($<_TMP) -include $<.h $(SRC) -o $@ $(CFLAGS) -I$< 
+$(OBJDIR)/%.o: % $(OBJDIR)
+	$(eval $<_TMP := $(shell echo $< | tr a-z A-Z | sed 's/\(SPX.\).*/\-D\1_APPLICATION /g'))
+	$(CC) -x c $</$<.h $($<_TMP) -c -o $@ $(CFLAGS) -I$<
 
 $(OBJDIR):
 	$(shell mkdir -p $(OBJDIR))

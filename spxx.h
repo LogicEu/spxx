@@ -29,12 +29,12 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #ifndef SIMPLE_PIXEL_EXTENSION_H
 #define SIMPLE_PIXEL_EXTENSION_H
 
-/******************
-****** spxe *******
-Simple PiXel Engine
-*******************
-@Eugenio Arteaga A.
-*******************
+/*********************
+******** spxx ********
+Simple PiXel Extension
+**********************
+   @Eugenio Arteaga A.
+**********************
 
 Simple Pixel Engine extension. Provides access to the
 entire collection of simple pixel headers in a single
