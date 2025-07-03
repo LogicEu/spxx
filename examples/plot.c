@@ -100,7 +100,7 @@ int main(const int argc, const char** argv)
         h = HEIGHT / s;
     }
 
-    fb = spxxStart("spxext", WIDTH, HEIGHT, w, h);
+    fb = spxxStart("plot", WIDTH, HEIGHT, w, h);
     p.x = fb.width / 2;
     p.y = fb.height / 2;
     c.x = (float)spxe.scrres.width * 0.5F;
@@ -109,15 +109,16 @@ int main(const int argc, const char** argv)
     
     while (spxeRun(fb.pixbuf)) {
         
-        if (spxeKeyPressed(ESCAPE)) {
+        if (spxeKeyPressed(KEY_ESCAPE)) {
             break;
         }
-        if (spxeKeyPressed(SPACE)) {
+        if (spxeKeyPressed(KEY_SPACE)) {
             t = !t;
         }
         
         m = pxMousePos();
         memset(fb.pixbuf, 0, size);
+        pxPlotRect(fb, p, m, purple);
         
         if (t) {
             pxPlotTriSmooth(
@@ -134,7 +135,6 @@ int main(const int argc, const char** argv)
         mf = vec2_from_ivec2(m);
         pxPlotLineSmooth(fb, c, mf, green);
         pxPlotCircleSmooth(fb, m, 20.0F, blue);
-        pxPlotRect(fb, p, m, purple);
         pxPlotBezier2Smooth2(fb, c, vec2_from_ivec2(q), mf, green);
         pxPlotLineSmooth2(fb, c, mf, blue);
     }
