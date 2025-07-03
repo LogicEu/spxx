@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cc=gcc
-std=-std=c89
+std=-std=c99
 opt=-O2
 inc=(-I.)
 ipath=/usr/local/include

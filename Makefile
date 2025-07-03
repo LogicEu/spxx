@@ -3,7 +3,7 @@
 TARGET=libspxx
 
 CC=gcc
-STD=-std=c89
+STD=-std=c99
 OPT=-O2
 WFLAGS=-Wall -Wextra -pedantic
 MODULES=spxe spxmath spximg spxplot

@@ -68,11 +68,11 @@ include statement.
 
 #endif /* SPXX_APPLICATION */
 
+#include <spxe.h>
 #include <spxmath.h>
 #include <spxplot.h>
-#include <spximg.h>
-#include <spxe.h>
 #include <spxfont.h>
+#include <spximg.h>
 
 #define spxxRun(tex) spxeRun((tex).pixbuf)
 #define spxxEnd(tex) spxeEnd((tex).pixbuf)
