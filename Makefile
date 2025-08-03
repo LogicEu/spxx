@@ -45,7 +45,7 @@ clean:
 
 $(OBJDIR)/%.o: % $(OBJDIR)
 	$(eval $<_TMP := $(shell echo $< | tr a-z A-Z | sed 's/\(SPX.\).*/\-D\1_APPLICATION /g'))
-	$(CC) -x c $</$<.h $($<_TMP) -c -o $@ $(CFLAGS) -I$<
+	$(CC) -x c spxx/$<.h $($<_TMP) -c -o $@ $(CFLAGS) -I$<
 
 $(OBJDIR):
 	$(shell mkdir -p $(OBJDIR))

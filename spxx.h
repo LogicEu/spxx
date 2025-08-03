@@ -68,15 +68,15 @@ include statement.
 
 #endif /* SPXX_APPLICATION */
 
-#include <spxe.h>
-#include <spxmath.h>
-#include <spxplot.h>
-#include <spxfont.h>
-#include <spximg.h>
+#include <spxx/spxe.h>
+#include <spxx/spxmath.h>
+#include <spxx/spxplot.h>
+#include <spxx/spxfont.h>
+#include <spxx/spximg.h>
 
 #define spxxRun(tex) spxeRun((tex).pixbuf)
 #define spxxEnd(tex) spxeEnd((tex).pixbuf)
-Tex2D   spxxStart(const char* title, int ww, int wh, int sw, int sh);
+#define spxxStart(title, ww, wh, sw, sh) (Tex2D){spxeStart(title, ww, wh, sw, sh), sw, sh}
 
 #ifdef SPXX_APPLICATION
 
@@ -86,13 +86,6 @@ Simple PiXel Extension
 **********************
 *  IMPLEMENTATION    *
 *********************/
-
-Tex2D spxxStart(const char* title, int ww, int wh, int sw, int sh)
-{
-    Tex2D tex = {NULL, sw, sh};
-    tex.pixbuf = spxeStart(title, ww, wh, sw, sh);
-    return tex;
-}
 
 #endif /* SPXX_APPLICATION */
 #endif /* SIMPLE_PIXEL_EXTENSION_H */

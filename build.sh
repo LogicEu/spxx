@@ -7,8 +7,6 @@ inc=(-I.)
 ipath=/usr/local/include
 modules=$(git submodule | awk '{ print $2 }')
 
-for m in ${modules[*]}; do inc+=(-I$m); done
-
 lib=(
     -lglfw 
     -lfreetype
@@ -49,6 +47,10 @@ compile() {
     cmd $cc $std $opt ${wflag[*]} ${inc[*]} ${lib[*]} ${os[*]} $1
 }
 
+cleand() {
+    [ -d $1 ] && cmd rm -rf $1
+}
+
 cleanf() {
     [ -f $1 ] && cmd rm $1
 }
@@ -60,18 +62,19 @@ clean() {
 
 install() {
     [ "$EUID" -ne 0 ] && echo "Run with 'sudo' to install" && exit
-    [ ! -d $ipath] && echo "install directory 'ipath' not found '$ipath'" && exit
+    [ ! -d $ipath ] && echo "install directory 'ipath' not found '$ipath'" && exit
     cmd cp spxx.h $ipath
-    for m in ${modules[*]}; do cmd cp $m/$m.h $ipath; done
+    cmd mkdir -p $ipath/spxx
+    for m in ${modules[*]}; do cmd cp $m/$m.h $ipath/spxx/; done
     echo "Successfully installed spxx"
     return 0
 }
 
 uninstall() {
     [ "$EUID" -ne 0 ] && echo "Run with 'sudo' to uninstall" && exit
-    [ ! -d $ipath] && echo "install directory 'ipath' not found '$ipath'" && exit
+    [ ! -d $ipath ] && echo "install directory 'ipath' not found '$ipath'" && exit
     cleanf $ipath/spxx.h
-    for m in ${modules[*]}; do cleanf $ipath/$m.h; done
+    cleand $ipath/spxx/
     echo "Successfully uninstalled spxx"
     return 0
 }
