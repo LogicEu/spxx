@@ -84,6 +84,15 @@ typedef struct vec2 {
 
 #endif /* VEC2_TYPE_DEFINED */
 
+#ifndef VEC3_TYPE_DEFINED
+#define VEC3_TYPE_DEFINED
+
+typedef struct vec3 {
+    float x, y, z;
+} vec3;
+
+#endif /* VEC3_TYPE_DEFINED */
+
 #ifndef VERT2D_TYPE_DEFINED
 #define VERT2D_TYPE_DEFINED
 
@@ -93,6 +102,16 @@ typedef struct Vert2D {
 } Vert2D;
 
 #endif /* VERT2D_TYPE_DEFINED */
+
+#ifndef VERT3D_TYPE_DEFINED
+#define VERT3D_TYPE_DEFINED
+
+typedef struct Vert3D {
+    vec3 pos;
+    vec2 uv;
+} Vert3D;
+
+#endif /* VERT3D_TYPE_DEFINED */
 
 #define pxAbs(n) (((n) >= 0) ? (n) : -(n))
 #define pxSign(n) (((n) >= 0) ? 1 : -1)
@@ -121,6 +140,7 @@ void    pxPlotRectRound(const Tex2D texture, ivec2 p, ivec2 q, float t, const Px
 void    pxPlotTri(const Tex2D texture, ivec2 p0, ivec2 p1, ivec2 p2, const Px color);
 void    pxPlotTriSmooth(const Tex2D texture, vec2 p0, vec2 p1, vec2 p2, const Px c);
 void    pxPlotTriTex(const Tex2D fb, const Tex2D tex, Vert2D p0, Vert2D p1, Vert2D p2);
+void    pxPlotTriTex3D(const Tex2D fb, const Tex2D tex, Vert3D p0, Vert3D p1, Vert3D p2);
 void    pxPlotCircle(const Tex2D texture, ivec2 p, float r, const Px color);
 void    pxPlotCircleSmooth(const Tex2D texture, ivec2 p, float r, const Px color);
 void    pxPlotTexture(const Tex2D fb, const Tex2D texture, ivec2 p);
@@ -447,6 +467,16 @@ static void pxSortTriVert2D(Vert2D t[3])
         pxSwap(t[2], t[1], Vert2D);
 }
 
+static void pxSortTriVert3D(Vert3D t[3])
+{
+    if (t[2].pos.y < t[0].pos.y || (t[2].pos.y == t[0].pos.y && t[2].pos.x < t[0].pos.x))
+        pxSwap(t[2], t[0], Vert3D);
+    if (t[1].pos.y < t[0].pos.y || (t[1].pos.y == t[0].pos.y && t[1].pos.x < t[0].pos.x))
+        pxSwap(t[1], t[0], Vert3D);
+    if (t[2].pos.y < t[1].pos.y || (t[2].pos.y == t[1].pos.y && t[2].pos.x < t[1].pos.x))
+        pxSwap(t[2], t[1], Vert3D);
+}
+
 void pxPlotTri(const Tex2D texture, ivec2 p0, ivec2 p1, ivec2 p2, const Px color)
 {
     const int resx = texture.width - 1, resy = texture.height - 1;
@@ -575,12 +605,19 @@ Px pxTexMapBilinear(const Tex2D texture, vec2 uv)
     vec2 fcoord;
     ivec2 icoord;
     Px samples[4];
+    if (texture.width < 2 || texture.height < 2) {
+        return pxTexMap(texture, uv);
+    }
     fcoord.x = uv.x * (texture.width - 1);
     fcoord.y = uv.y * (texture.height - 1);
     icoord.x = (int)fcoord.x;
     icoord.y = (int)fcoord.y;
+    icoord.x = pxClamp(icoord.x, 0, texture.width - 2);
+    icoord.y = pxClamp(icoord.y, 0, texture.height - 2);
     fcoord.x -= icoord.x;
     fcoord.y -= icoord.y;
+    fcoord.x = pxClamp(fcoord.x, 0.0F, 1.0F);
+    fcoord.y = pxClamp(fcoord.y, 0.0F, 1.0F);
     samples[0] = pxAt(texture, icoord.x, icoord.y);
     samples[1] = pxAt(texture, icoord.x + 1, icoord.y);
     samples[2] = pxAt(texture, icoord.x, icoord.y + 1);
@@ -676,6 +713,129 @@ void pxPlotTriTex(const Tex2D fb, const Tex2D texture, Vert2D p0, Vert2D p1, Ver
             color = pxTexMapBilinear(texture, uv);
             pxBlend(fb, x, y, sum * ni, color);
 
+        }
+    }
+}
+
+void pxPlotTriTex3D(const Tex2D fb, const Tex2D texture, Vert3D p0, Vert3D p1, Vert3D p2)
+{
+    static const vec2 P[] = {
+        {0.0F, 0.0F}, {1.0F, 0.0F}, {0.0F, -1.0F}, {-1.0F, 0.0F}, {0.0F, 1.0F}
+        ,{1.0F, 1.0F}, {1.0F, -1.0F}, {-1.0F, -1.0F}, {-1.0F, 1.0F}
+    };
+    vec2 p0_xy, p1_xy, p2_xy;
+
+    const int resy = fb.height - 1;
+    const float ni = 1.0F / (sizeof(P) / sizeof(P[0]));
+    float difx[3], difuiz[3], difviz[3], difiz[3], steps[3];
+    int y, n, starty, endy;
+    Vert3D t[3];
+
+    p0_xy.x = p0.pos.x;
+    p0_xy.y = p0.pos.y;
+    p1_xy.x = p1.pos.x;
+    p1_xy.y = p1.pos.y;
+    p2_xy.x = p2.pos.x;
+    p2_xy.y = p2.pos.y;
+
+    t[0] = p0;
+    t[1] = p1;
+    t[2] = p2;
+    pxSortTriVert3D(t);
+
+    starty = pxMax(t[0].pos.y, 0);
+    endy = pxMin(t[2].pos.y, resy);
+    
+    difx[0] = t[2].pos.x - t[0].pos.x;
+    difx[1] = t[1].pos.x - t[0].pos.x;
+    difx[2] = t[2].pos.x - t[1].pos.x;
+    
+    {
+        float iz0 = 1.0F / pxMax(t[0].pos.z, 0.000001F);
+        float iz1 = 1.0F / pxMax(t[1].pos.z, 0.000001F);
+        float iz2 = 1.0F / pxMax(t[2].pos.z, 0.000001F);
+        float uiz0 = t[0].uv.x * iz0;
+        float viz0 = t[0].uv.y * iz0;
+        float uiz1 = t[1].uv.x * iz1;
+        float viz1 = t[1].uv.y * iz1;
+        float uiz2 = t[2].uv.x * iz2;
+        float viz2 = t[2].uv.y * iz2;
+
+        difuiz[0] = uiz2 - uiz0;
+        difviz[0] = viz2 - viz0;
+        difiz[0] = iz2 - iz0;
+        difuiz[1] = uiz1 - uiz0;
+        difviz[1] = viz1 - viz0;
+        difiz[1] = iz1 - iz0;
+        difuiz[2] = uiz2 - uiz1;
+        difviz[2] = viz2 - viz1;
+        difiz[2] = iz2 - iz1;
+    }
+
+    steps[0] = t[2].pos.y - t[0].pos.y ? 1.0F / (t[2].pos.y - t[0].pos.y) : 0.0F;
+    steps[1] = t[1].pos.y - t[0].pos.y ? 1.0F / (t[1].pos.y - t[0].pos.y) : 0.0F;
+    steps[2] = t[2].pos.y - t[1].pos.y ? 1.0F / (t[2].pos.y - t[1].pos.y) : 0.0F;
+
+    for (y = starty, n = 1; y <= endy; ++y) {
+        
+        vec2 uv0, uv1;
+        int x, startx, endx;
+        float d0, d1, x0, x1, iz0, iz1;
+
+        n += n == 1 && y >= t[1].pos.y; 
+        d0 = steps[0] != 0.0F ? steps[0] * ((float)y - t[0].pos.y) : 1.0F;
+        d1 = steps[n] != 0.0F ? steps[n] * ((float)y - t[n - 1].pos.y) : 1.0F;
+        x0 = t[0].pos.x + difx[0] * pxMax(d0, 0.0F); 
+        x1 = t[n - 1].pos.x + difx[n] * pxMax(d1, 0.0F);
+
+        uv0.x = t[0].uv.x / pxMax(t[0].pos.z, 0.000001F) + difuiz[0] * pxMax(d0, 0.0F);
+        uv0.y = t[0].uv.y / pxMax(t[0].pos.z, 0.000001F) + difviz[0] * pxMax(d0, 0.0F);
+        iz0 = 1.0F / pxMax(t[0].pos.z, 0.000001F) + difiz[0] * pxMax(d0, 0.0F);
+
+        uv1.x = t[n - 1].uv.x / pxMax(t[n - 1].pos.z, 0.000001F) + difuiz[n] * pxMax(d1, 0.0F);
+        uv1.y = t[n - 1].uv.y / pxMax(t[n - 1].pos.z, 0.000001F) + difviz[n] * pxMax(d1, 0.0F);
+        iz1 = 1.0F / pxMax(t[n - 1].pos.z, 0.000001F) + difiz[n] * pxMax(d1, 0.0F);
+
+        if (x1 < x0) {
+            pxSwap(x0, x1, float);
+            pxSwap(uv0, uv1, vec2);
+            pxSwap(iz0, iz1, float);
+        }
+ 
+        startx = pxMax(x0, 0);
+        endx = pxMin(x1 + 1, fb.width);
+        
+        for (x = startx; x < endx; ++x) {
+            
+            Px color;
+            vec2 p, uv;
+            unsigned int j;
+            float tscan, sum = 0.0F, depth, iz;
+            
+            tscan = normalize(x0, x1, x);
+            uv = vec2_mix(uv0, uv1, tscan);
+            iz = iz0 + tscan * (iz1 - iz0);
+            if (iz <= 0.0F) {
+                continue;
+            }
+            depth = 1.0F / iz;
+            uv.x *= depth;
+            uv.y *= depth;
+            p.x = (float)x;
+            p.y = (float)y;
+
+            for (j = 0; j < sizeof(P) / sizeof(p); ++j) {
+                vec2 q;
+                q.x = p.x + 0.5F * P[j].x;
+                q.y = p.y + 0.5F * P[j].y;
+                sum += (float)( vec2_determinant(p1_xy, p2_xy, q) >= 0.0F &&
+                                vec2_determinant(p2_xy, p0_xy, q) >= 0.0F &&
+                                vec2_determinant(p0_xy, p1_xy, q) >= 0.0F);
+            }
+           
+            color = pxTexMapBilinear(texture, uv);
+            pxBlend(fb, x, y, sum * ni, color);
+            (void)depth;
         }
     }
 }

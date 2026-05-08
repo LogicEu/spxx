@@ -66,6 +66,14 @@ include statement.
 #define SPXF_APPLICATION
 #endif /* SPXF_APPLICATION */
 
+#ifndef SPXUI_APPLICATION
+#define SPXUI_APPLICATION
+#endif /* SPXUI_APPLICATION */
+
+#ifndef SPXMESH_APPLICATION
+#define SPXMESH_APPLICATION
+#endif /* SPXMESH_APPLICATION */
+
 #endif /* SPXX_APPLICATION */
 
 #include <spxx/spxe.h>
@@ -73,6 +81,8 @@ include statement.
 #include <spxx/spxplot.h>
 #include <spxx/spxfont.h>
 #include <spxx/spximg.h>
+#include <spxx/spxui.h>
+#include <spxx/spxmesh.h>
 
 #define spxxRun(tex) spxeRun((tex).pixbuf)
 #define spxxEnd(tex) spxeEnd((tex).pixbuf)
