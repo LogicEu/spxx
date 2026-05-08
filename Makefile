@@ -6,7 +6,7 @@ CC=gcc
 STD=-std=c99
 OPT=-O2
 WFLAGS=-Wall -Wextra -pedantic
-MODULES=spxe spxmath spximg spxplot spxfont
+MODULES=spxe spxmath spximg spxplot spxfont spxui spxmesh
 OBJDIR=bin
 OBJS=$(patsubst %,$(OBJDIR)/%.o,$(MODULES))
 LIBS=-lpng -ljpeg -lz -lfreetype -lglfw
