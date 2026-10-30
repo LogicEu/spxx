@@ -330,32 +330,214 @@ spxPixmaps[SPXF_GLYPH_COUNT][SPXF_DEFAULT_FONT_HEIGHT * SPXF_DEFAULT_FONT_WIDTH]
         255,   0,   0,   0,   0,   0,
         255, 255, 255, 255,   0,   0
     },
-    ['A'] = {0},
-    ['B'] = {0},
-    ['C'] = {0},
-    ['D'] = {0},
-    ['E'] = {0},
-    ['F'] = {0},
-    ['G'] = {0},
-    ['H'] = {0},
-    ['I'] = {0},
-    ['J'] = {0},
-    ['K'] = {0},
-    ['L'] = {0},
-    ['M'] = {0},
-    ['N'] = {0},
-    ['O'] = {0},
-    ['P'] = {0},
-    ['Q'] = {0},
-    ['R'] = {0},
-    ['S'] = {0},
-    ['T'] = {0},
-    ['U'] = {0},
-    ['V'] = {0},
-    ['W'] = {0},
-    ['X'] = {0},
-    ['Y'] = {0},
-    ['Z'] = {0},
+    ['A'] = {
+        0, 255, 255,   0,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255, 255, 255, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0
+    },
+    ['B'] = {
+        255, 255, 255,   0,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255, 255, 255,   0,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255, 255, 255,   0,   0,   0
+    },
+    ['C'] = {
+        0, 255, 255,   0,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0,   0,   0,   0,
+        255,   0,   0,   0,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        0, 255, 255,   0,   0,   0
+    },
+    ['D'] = {
+        255, 255, 255,   0,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255, 255, 255,   0,   0,   0
+    },
+    ['E'] = {
+        255, 255, 255, 255,   0,   0,
+        255,   0,   0,   0,   0,   0,
+        255, 255, 255,   0,   0,   0,
+        255,   0,   0,   0,   0,   0,
+        255,   0,   0,   0,   0,   0,
+        255, 255, 255, 255,   0,   0
+    },
+    ['F'] = {
+        255, 255, 255, 255,   0,   0,
+        255,   0,   0,   0,   0,   0,
+        255, 255, 255,   0,   0,   0,
+        255,   0,   0,   0,   0,   0,
+        255,   0,   0,   0,   0,   0,
+        255,   0,   0,   0,   0,   0
+    },
+    ['G'] = {
+        0, 255, 255,   0,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0,   0,   0,   0,
+        255,   0, 255, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        0, 255, 255, 255,   0,   0
+    },
+    ['H'] = {
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255, 255, 255, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0
+    },
+    ['I'] = {
+        255, 255, 255,   0,   0,   0,
+        0, 255,   0,   0,   0,   0,
+        0, 255,   0,   0,   0,   0,
+        0, 255,   0,   0,   0,   0,
+        0, 255,   0,   0,   0,   0,
+        255, 255, 255,   0,   0,   0
+    },
+    ['J'] = {
+        0,   0, 255, 255,   0,   0,
+        0,   0,   0, 255,   0,   0,
+        0,   0,   0, 255,   0,   0,
+        0,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        0, 255, 255,   0,   0,   0
+    },
+    ['K'] = {
+        255,   0,   0, 255,   0,   0,
+        255,   0, 255,   0,   0,   0,
+        255, 255,   0,   0,   0,   0,
+        255, 255,   0,   0,   0,   0,
+        255,   0, 255,   0,   0,   0,
+        255,   0,   0, 255,   0,   0
+    },
+    ['L'] = {
+        255,   0,   0,   0,   0,   0,
+        255,   0,   0,   0,   0,   0,
+        255,   0,   0,   0,   0,   0,
+        255,   0,   0,   0,   0,   0,
+        255,   0,   0,   0,   0,   0,
+        255, 255, 255, 255,   0,   0
+    },
+    ['M'] = {
+        255,   0,   0,   0, 255,   0,
+        255, 255,   0, 255, 255,   0,
+        255,   0, 255,   0, 255,   0,
+        255,   0,   0,   0, 255,   0,
+        255,   0,   0,   0, 255,   0,
+        255,   0,   0,   0, 255,   0
+    },
+    ['N'] = {
+        255,   0,   0, 255,   0,   0,
+        255, 255,   0, 255,   0,   0,
+        255, 255,   0, 255,   0,   0,
+        255,   0, 255, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0
+    },
+    ['O'] = {
+        0, 255, 255,   0,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        0, 255, 255,   0,   0,   0
+    },
+    ['P'] = {
+        255, 255, 255,   0,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255, 255, 255,   0,   0,   0,
+        255,   0,   0,   0,   0,   0,
+        255,   0,   0,   0,   0,   0
+    },
+    ['Q'] = {
+        0, 255, 255,   0,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0, 255, 255,   0,   0,
+        0, 255, 255,   0,   0,   0,
+        0,   0,   0, 255,   0,   0
+    },
+    ['R'] = {
+        255, 255, 255,   0,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255, 255, 255,   0,   0,   0,
+        255,   0, 255,   0,   0,   0,
+        255,   0,   0, 255,   0,   0
+    },
+    ['S'] = {
+        0, 255, 255, 255,   0,   0,
+        255,   0,   0,   0,   0,   0,
+        255, 255, 255,   0,   0,   0,
+        0,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        0, 255, 255,   0,   0,   0
+    },
+    ['T'] = {
+        255, 255, 255, 255,   0,   0,
+        0, 255,   0,   0,   0,   0,
+        0, 255,   0,   0,   0,   0,
+        0, 255,   0,   0,   0,   0,
+        0, 255,   0,   0,   0,   0,
+        0, 255,   0,   0,   0,   0
+    },
+    ['U'] = {
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        0, 255, 255,   0,   0,   0
+    },
+    ['V'] = {
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        0, 255, 255,   0,   0,   0,
+        0,   0, 255,   0,   0,   0
+    },
+    ['W'] = {
+        255,   0,   0,   0, 255,   0,
+        255,   0,   0,   0, 255,   0,
+        255,   0,   0,   0, 255,   0,
+        255,   0, 255,   0, 255,   0,
+        255,   0, 255,   0, 255,   0,
+        0, 255,   0, 255,   0,   0
+    },
+    ['X'] = {
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        0, 255, 255,   0,   0,   0,
+        0, 255, 255,   0,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0
+    },
+    ['Y'] = {
+        255,   0,   0, 255,   0,   0,
+        255,   0,   0, 255,   0,   0,
+        0, 255, 255,   0,   0,   0,
+        0, 255,   0,   0,   0,   0,
+        0, 255,   0,   0,   0,   0,
+        0, 255,   0,   0,   0,   0
+    },
+    ['Z'] = {
+        255, 255, 255, 255,   0,   0,
+        0,   0,   0, 255,   0,   0,
+        0,   0, 255,   0,   0,   0,
+        0, 255,   0,   0,   0,   0,
+        255,   0,   0,   0,   0,   0,
+        255, 255, 255, 255,   0,   0
+    },
     ['0'] = {
         0, 255, 255,   0,   0,   0,
         255,   0,   0, 255,   0,   0,
@@ -484,41 +666,48 @@ spxPixmaps[SPXF_GLYPH_COUNT][SPXF_DEFAULT_FONT_HEIGHT * SPXF_DEFAULT_FONT_WIDTH]
         0,   0,   255,   0,   0,   0,
         0,   0,   0,     0,   0,   0,
         0,   0,   255,   0,   0,   0
+    },
+    [':'] = {
+        0,   0,   0,     0,   0,   0,
+        0,   0,   255,   0,   0,   0,
+        0,   0,   0,     0,   0,   0,
+        0,   0,   0,     0,   0,   0,
+        0,   0,   255,   0,   0,   0,
+        0,   0,   0,     0,   0,   0
     }
 };
 
 #define spxGlyphIvec2 {SPXF_DEFAULT_FONT_WIDTH, SPXF_DEFAULT_FONT_HEIGHT}
 #define spxGlyphConst spxGlyphIvec2, spxGlyphIvec2, SPXF_DEFAULT_FONT_WIDTH << 6
 #define spxGlyphInstantiate(c) [c] = {spxPixmaps[c], spxGlyphConst}
-#define spxGlyphInstantiateUpper(c) [c] = {spxPixmaps[c + 32], spxGlyphConst}
 
 static Glyph spxGlyphs[SPXF_GLYPH_COUNT] = {
-    spxGlyphInstantiateUpper('A'),
-    spxGlyphInstantiateUpper('B'),
-    spxGlyphInstantiateUpper('C'),
-    spxGlyphInstantiateUpper('D'),
-    spxGlyphInstantiateUpper('E'),
-    spxGlyphInstantiateUpper('F'),
-    spxGlyphInstantiateUpper('G'),
-    spxGlyphInstantiateUpper('H'),
-    spxGlyphInstantiateUpper('I'),
-    spxGlyphInstantiateUpper('J'),
-    spxGlyphInstantiateUpper('K'),
-    spxGlyphInstantiateUpper('L'),
-    spxGlyphInstantiateUpper('M'),
-    spxGlyphInstantiateUpper('N'),
-    spxGlyphInstantiateUpper('O'),
-    spxGlyphInstantiateUpper('P'),
-    spxGlyphInstantiateUpper('Q'),
-    spxGlyphInstantiateUpper('R'),
-    spxGlyphInstantiateUpper('S'),
-    spxGlyphInstantiateUpper('T'),
-    spxGlyphInstantiateUpper('U'),
-    spxGlyphInstantiateUpper('V'),
-    spxGlyphInstantiateUpper('W'),
-    spxGlyphInstantiateUpper('X'),
-    spxGlyphInstantiateUpper('Y'),
-    spxGlyphInstantiateUpper('Z'),
+    spxGlyphInstantiate('A'),
+    spxGlyphInstantiate('B'),
+    spxGlyphInstantiate('C'),
+    spxGlyphInstantiate('D'),
+    spxGlyphInstantiate('E'),
+    spxGlyphInstantiate('F'),
+    spxGlyphInstantiate('G'),
+    spxGlyphInstantiate('H'),
+    spxGlyphInstantiate('I'),
+    spxGlyphInstantiate('J'),
+    spxGlyphInstantiate('K'),
+    spxGlyphInstantiate('L'),
+    spxGlyphInstantiate('M'),
+    spxGlyphInstantiate('N'),
+    spxGlyphInstantiate('O'),
+    spxGlyphInstantiate('P'),
+    spxGlyphInstantiate('Q'),
+    spxGlyphInstantiate('R'),
+    spxGlyphInstantiate('S'),
+    spxGlyphInstantiate('T'),
+    spxGlyphInstantiate('U'),
+    spxGlyphInstantiate('V'),
+    spxGlyphInstantiate('W'),
+    spxGlyphInstantiate('X'),
+    spxGlyphInstantiate('Y'),
+    spxGlyphInstantiate('Z'),
 
     spxGlyphInstantiate('a'),
     spxGlyphInstantiate('b'),
@@ -563,7 +752,8 @@ static Glyph spxGlyphs[SPXF_GLYPH_COUNT] = {
     spxGlyphInstantiate('.'),
     spxGlyphInstantiate('-'),
     spxGlyphInstantiate('!'),
-    spxGlyphInstantiate('?')
+    spxGlyphInstantiate('?'),
+    spxGlyphInstantiate(':')
 };
 
 Font2D spxFontDefault = {NULL, spxGlyphs};
